@@ -75,6 +75,7 @@
     @extends('components.footer.footer')
     @extends('components.content.index')
     @extends('components.navigation.navbar')
+    @include('components.modal.modals')
 
 </body>
 </html>

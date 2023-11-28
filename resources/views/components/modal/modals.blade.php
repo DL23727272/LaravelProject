@@ -7,7 +7,8 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form class="form"  method="post"  id="arwenForm">
+          <form class="bookAppointment"  method="post" action="{{ route('book.appointment', ['barber' => 'arwen']) }}" id="arwenForm">
+            @csrf
             <h1 class="display-3"><i class="fa-solid fa-user"></i> Arwen</h1>
             <p class="lead fs-6">Please fill in the details to book an appointment with Barber Arwen:</p>
 
@@ -67,7 +68,8 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form class="form"  method="post"  id="allenForm">
+          <form class="bookAppointment"  method="post" action="{{ route('book.appointment', ['barber' => 'allen']) }}"  id="allenForm">
+            @csrf
             <h1 class="display-3"><i class="fa-solid fa-user"></i> Allen</h1>
             <p class="lead">Please fill in the details to book an appointment with Barber Allen:</p>
 
@@ -126,7 +128,8 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form class="form"  method="post"  id="ramilForm">
+          <form class="bookAppointment"  method="post" action="{{ route('book.appointment', ['barber' => 'ramil']) }}"  id="ramilForm">
+            @csrf
             <h1 class="display-3"><i class="fa-solid fa-user"></i> Ramil</h1>
             <p class="lead">Please fill in the details to book an appointment with Barber Ramil:</p>
             <div class="d-flex flex-column">
@@ -292,7 +295,9 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form class="form" action="Process/loginProcess.php" method="post">
+          <form class="form" action="{{ route('login') }}" method="post">
+            @csrf
+
             <h1>Log-in</h1>
 
             <div class="form-group">

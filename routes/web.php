@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BookingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('app');
+    return view('home');
 });
 
 Route::get('/book', function(){
@@ -22,5 +24,20 @@ Route::get('/book', function(){
 });
 
 Route::get('/home', function(){
-    return view('app');
+    return view('home');
 });
+
+Route::get('/admin', function(){
+    return view('admin');
+});
+
+Route::post('/book-appointment/{barber}', [BookingController::class, 'bookAppointment'])->name('book.appointment');
+
+
+Route::post('/contact-form', [ContactController::class, 'processForm'])->name('contact.form');
+
+
+Route::post('/barber-process/{barber}', [BookingController::class, 'bookAppointment'])->name('barber.process');
+
+
+Route::post('/login', [AuthController::class, 'login'])->name('login');
