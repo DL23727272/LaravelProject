@@ -84,7 +84,7 @@
 
     </head>
     <body>
-        <?php include ('../modals.php'); ?>
+        @include('components.modal.modals')
 
         <nav class="navbar bg-body-tertiary fixed-top shadow p-3 mb-5 bg-body-tertiary rounded">
         <div class="container-fluid">

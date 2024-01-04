@@ -295,7 +295,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form class="form" action="{{ route('login') }}" method="post">
+            <form class="form" action="{{ route('login') }}" method="post">
             @csrf
 
             <h1>Log-in</h1>

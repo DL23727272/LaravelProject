@@ -19,7 +19,7 @@ class AuthController extends Controller
 
         if ($this->authenticate($request->input('username'), $request->input('password'))) {
             // Authentication successful, redirect to admin/admin.php
-            return redirect('components/admin/admin.php');
+            return redirect('admin');
         }
 
         // Authentication failed, redirect back to the login form with an error message

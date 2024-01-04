@@ -10,6 +10,7 @@ class BookingController extends Controller
     public function index(){
         return view('book');
     }
+    
     public function bookAppointment(Request $request, $barber)
     {
 
@@ -34,7 +35,7 @@ class BookingController extends Controller
                 'message' => 'Time is already taken',
             ];
         } else {
-           
+
             DB::table($barberTable)->insert([
                 'checkin_date' => $request->input('dateIn'),
                 'checkin_time' => $request->input('timeIn'),
