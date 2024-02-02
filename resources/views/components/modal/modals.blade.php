@@ -39,13 +39,18 @@
             </div>
 
             <div class="d-flex flex-column">
+                <h1 class="lead fs-6"><i class="fa-solid fa-phone"></i> Your Phone</h1>
+                <input type="tel" id="phone1" name="phone" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" required>
+            </div>
+
+            <div class="d-flex flex-column">
               <h1 class="lead fs-6"><i class="fa-solid fa-bell-concierge"></i> Select Services</h1>
               <select class="form-select" id="inputGroupSelect01" name="serviceType">
                 <option disabled selected value="">Choose a service...</option>
-                <option value="Haircut">Haircut</option>
-                <option value="Shave">Shave</option>
-                <option value="Beard Trim">Beard Trim</option>
-                <option value="Hair styling">Hair styling</option>
+                <option value="Haircut">Haircut (140.00)</option>
+                <option value="Shave">Shave (60.00)</option>
+                <option value="Beard Trim">Beard Trim (60.00)</option>
+                <option value="Hair styling">Hair styling (160.00)</option>
               </select>
             </div>
 
@@ -100,13 +105,18 @@
             </div>
 
             <div class="d-flex flex-column">
+                <h1 class="lead fs-6"><i class="fa-solid fa-phone"></i> Your Phone</h1>
+                <input type="tel" id="phone1" name="phone" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" required>
+            </div>
+
+            <div class="d-flex flex-column">
               <h1 class="lead fs-6"><i class="fa-solid fa-bell-concierge"></i> Select Services</h1>
               <select class="form-select" id="inputGroupSelect01" name="serviceType">
                 <option disabled selected value="">Choose a service...</option>
-                <option value="Haircut">Haircut</option>
-                <option value="Shave">Shave</option>
-                <option value="Beard Trim">Beard Trim</option>
-                <option value="Hair styling">Hair styling</option>
+                <option value="Haircut">Haircut (140.00)</option>
+                <option value="Shave">Shave (60.00)</option>
+                <option value="Beard Trim">Beard Trim (60.00)</option>
+                <option value="Hair styling">Hair styling (160.00)</option>
               </select>
             </div>
           </div>
@@ -157,15 +167,21 @@
               </select>
             </div>
             </div>
+            
+            <div class="d-flex flex-column">
+                <h1 class="lead fs-6"><i class="fa-solid fa-phone"></i> Your Phone</h1>
+                <input type="tel" id="phone1" name="phone" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" required>
+            </div>
+
 
             <div class="d-flex flex-column">
               <h1 class="lead fs-6"><i class="fa-solid fa-bell-concierge"></i> Select Services</h1>
               <select class="form-select" id="inputGroupSelect01" name="serviceType">
                 <option disabled selected value="">Choose a service...</option>
-                <option value="Haircut">Haircut</option>
-                <option value="Shave">Shave</option>
-                <option value="Beard Trim">Beard Trim</option>
-                <option value="Hair styling">Hair styling</option>
+                <option value="Haircut">Haircut (140.00)</option>
+                <option value="Shave">Shave (60.00)</option>
+                <option value="Beard Trim">Beard Trim (60.00)</option>
+                <option value="Hair styling">Hair styling (160.00)</option>
               </select>
             </div>
           </div>

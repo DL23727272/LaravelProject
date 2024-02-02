@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" 
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" ></script>
@@ -17,7 +17,7 @@
     </head>
     <body>
         <?php include ('../modals.php'); ?>
-        
+
         <nav class="navbar bg-body-tertiary fixed-top shadow p-3 mb-5 bg-body-tertiary rounded">
         <div class="container-fluid">
             <a class="navbar-brand" href="admin.php"><i class="fa-solid fa-users-line"></i> Admin</a>
@@ -58,7 +58,7 @@
         <h1 class="h4 mt-5"><i class="fa-solid fa-user-check"></i> Allen</h1>
         <?php
             include 'D:\xampp\htdocs\Appointment\Process\myConnection.php';
-            
+
             $currentDate = date("Y-m-d");
 
             $query = "SELECT * FROM allen WHERE checkin_date = '$currentDate'";
@@ -80,7 +80,7 @@
                 <th scope="col"> Edit </th>
                 <th scope="col"> Delete </th>
             </tr>
-            <?php 
+            <?php
                 include 'D:\xampp\htdocs\Appointment\Process\myConnection.php';
 
                 $query = "SELECT * FROM allen";
@@ -88,7 +88,7 @@
 
                 if(mysqli_num_rows($result) > 0){
                     while($row = mysqli_fetch_array($result)){
-            ?>         
+            ?>
                 <tr>
                     <td> <?php echo $row["id"];?> </td>
                     <td> <?php echo $row["checkin_date"];?> </td>
@@ -105,9 +105,9 @@
                         <button type='button' class='btn btn-warning'>Delete</button>
                     </a>
                     </td>
-                    
+
                 </tr>
-                
+
                 <?php
                     }
                 }
@@ -115,7 +115,7 @@
                     echo "<p class='lead'><i class='fa-solid fa-square-poll-vertical'></i> 0 book</p>";
                 }
             ?>
-            
+
         </table>
         </div>
         <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
@@ -135,14 +135,14 @@
 
                                 setTimeout(function () {
                                     location.reload();
-                                }, 1000); 
+                                }, 1000);
                             } else {
                                 alertify.error(response.message);
                             }
                         },
                     });
                 }, function () {
-                   
+
                 });
             }
 

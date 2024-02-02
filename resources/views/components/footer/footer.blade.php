@@ -33,8 +33,10 @@
                 </div>
             </div>
         </div>
+        <!----Contact--->
         <div class="d-sm-flex flex-sm-column" id="contact">
-            <form action="contactForm.php" method="post" id="contactForms">
+            <form action="{{ route('contact.submitForm') }}" method="post" id="contactForms">
+                @csrf
                 <h1 class="h6">Contact Us!</h1>
                 <div class="input-group input-group-sm mb-3">
                     <span class="input-group-text" id="inputGroup-sizing-sm">Name</span>
@@ -62,47 +64,14 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
-    // Contact Form
-    $(document).ready(function() {
-        alertify.set('notifier', 'position', 'top-right');
+    alertify.set('notifier', 'position', 'top-right');
 
 
-        $("#contactForms").submit(function(e) {
-            e.preventDefault();
 
-
-            var name = $("input[name='name']").val();
-            var email = $("input[name='email']").val();
-            var subject = $("input[name='subject']").val();
-            var message = $("textarea[name='message']").val();
-
-
-            var data = {
-                name: name,
-                email: email,
-                subject: subject,
-                message: message
-            };
-
-
-            $.ajax({
-                type: "POST",
-                url: "contactForm.php",
-                data: data,
-                success: function(response) {
-
-                    if (response.status === 'success') {
-                        alertify.success(response.message);
-                        $("#contactForms")[0].reset();
-                    } else {
-                        alertify.error(response.message);
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error("AJAX Error: " + status + " - " + error);
-                    alertify.error("An error occurred while processing your request.");
-                }
-            });
-        });
-    });
+    @if(Session::get('success'))
+        alertify.success("{{ Session::get('success') }}");
+    @endif
+    @if(Session::has('fail'))
+        alertify.error("{{ Session::get('fail') }}");
+    @endif
 </script>

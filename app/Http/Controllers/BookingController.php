@@ -10,7 +10,7 @@ class BookingController extends Controller
     public function index(){
         return view('book');
     }
-    
+
     public function bookAppointment(Request $request, $barber)
     {
 
@@ -19,6 +19,7 @@ class BookingController extends Controller
             'dateIn' => 'required|date',
             'timeIn' => 'required',
             'serviceType' => 'required|string',
+            'phone' => 'required|string|max:12'
         ]);
 
 
@@ -41,6 +42,7 @@ class BookingController extends Controller
                 'checkin_time' => $request->input('timeIn'),
                 'name' => $request->input('fname'),
                 'service_type' => $request->input('serviceType'),
+                'phone' => $request->input('phone'),
             ]);
 
             $response = [

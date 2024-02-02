@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Paesano</title>
+    <title>Paesano | Book</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
@@ -89,47 +89,7 @@
 <script>
     alertify.set('notifier', 'position', 'top-right');
 
-    // Contact Form
-    $(document).ready(function () {
-        alertify.set('notifier', 'position', 'top-right');
 
-        $("#contactForms").submit(function (e) {
-            e.preventDefault();
-
-            var name = $("input[name='name']").val();
-            var email = $("input[name='email']").val();
-            var subject = $("input[name='subject']").val();
-            var message = $("textarea[name='message']").val();
-
-            var data = {
-                name: name,
-                email: email,
-                subject: subject,
-                message: message
-            };
-
-            $.ajax({
-                type: "POST",
-                url: "{{ route('contact.form') }}", 
-                data: data,
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function (response) {
-                    if (response.status === 'success') {
-                        alertify.success(response.message);
-                        $("#contactForms")[0].reset();
-                    } else {
-                        alertify.error(response.message);
-                    }
-                },
-                error: function (xhr, status, error) {
-                    console.error("AJAX Error: " + status + " - " + error);
-                    alertify.error("An error occurred while processing your request.");
-                }
-            });
-        });
-    });
 
     // Arwen Modal Form Submit
     $("#arwenForm").submit(function (event) {
@@ -146,6 +106,8 @@
             success: function (response) {
                 if (response.status === 'success') {
                     alertify.success(response.message);
+                    var msg = alertify.notify('You will receive a call for confirmation, Thank you!', 'custom', 2, function(){console.log('dismissed');});
+                    msg.delay(7);
                     $("#barber1").modal("hide");
                     $("#arwenForm")[0].reset();
                 } else {
@@ -173,6 +135,8 @@
             success: function (response) {
                 if (response.status === 'success') {
                     alertify.success(response.message);
+                    var msg = alertify.notify('You will receive a call for confirmation, Thank you!', 'custom', 2, function(){console.log('dismissed');});
+                    msg.delay(7);
                     $("#barber2").modal("hide");
                     $("#allenForm")[0].reset();
                 } else {
@@ -200,6 +164,9 @@
             success: function (response) {
                 if (response.status === 'success') {
                     alertify.success(response.message);
+                    var msg = alertify.notify('You will receive a call for confirmation, Thank you!', 'custom', 2, function(){console.log('dismissed');});
+                    msg.delay(7);
+                   // alertify.success("You will recieve a call for confirmation");
                     $("#barber3").modal("hide");
                     $("#ramilForm")[0].reset();
                 } else {

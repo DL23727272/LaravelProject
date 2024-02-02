@@ -10,32 +10,38 @@ class AuthController extends Controller
 {
     public function login(Request $request)
     {
-        // Validate the login form data
         $request->validate([
             'username' => 'required|string',
             'password' => 'required|string',
         ]);
 
-
         if ($this->authenticate($request->input('username'), $request->input('password'))) {
-            // Authentication successful, redirect to admin/admin.php
-            return redirect('admin');
+            return redirect()->route('admin.dashboard');
         }
 
-        // Authentication failed, redirect back to the login form with an error message
         return redirect()->back()->withInput()->withErrors(['error' => 'Invalid credentials']);
     }
 
     protected function authenticate($username, $password)
     {
-        // Fetch the user record from the database based on the provided username
+
         $user = DB::table('admin')->where('name', $username)->first();
 
-        // Check if the user exists and the password is correct
-        if ($user && Hash::check($password, $user->password)) {
-            return true; // Authentication successful
+        if ($user && ($this->isMd5Equal($password, $user->password) || Hash::check($password, $user->password))) {
+            return true;
         }
 
-        return false; // Authentication failed
+        return false; 
+    }
+
+    protected function isMd5Equal($password, $hashedPassword)
+    {
+        return md5($password) === $hashedPassword;
+    }
+
+
+    public function adminDashboard()
+    {
+        return view('admin');
     }
 }
