@@ -32,7 +32,7 @@
                 echo "<th scope='col'><i class='fa-solid fa-signature'></i> Subject </th>";
                 echo "<th scope='col'><i class='fa-solid fa-message'></i> Messages </th>";
            //     echo "<th scope='col'><i class='fa-solid fa-pen-to-square'></i> Done </th>";
-           //     echo "<th scope='col'><i class='fa-solid fa-trash'></i> Delete </th>";
+               echo "<th scope='col'><i class='fa-solid fa-trash'></i> Delete </th>";
                 echo "</tr>";
 
                 if(mysqli_num_rows($result) > 0){
@@ -43,6 +43,9 @@
                         echo "<td> {$row["email"]} </td>";
                         echo "<td> {$row["subject"]} </td>";
                         echo "<td> {$row["message"]} </td>";
+                        echo "<td>".
+                            "<button class='btn btn-primary' onclick='deleteMessage(" . $row['id'] . ")'>Delete</button>".
+                            "</td>";
                         echo "</tr>";
                     }
                 } else {
@@ -69,6 +72,8 @@
             <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
             <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css" />
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <meta name="csrf-token" content="{{ csrf_token() }}">
+
             <style>
                 #img{
                         width: 50px;
@@ -216,9 +221,7 @@
 
 
             <?php
-
-                  displayMessages($connect);
-
+                  displayMessages($connect); //call the function
              ?>
 
             <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
@@ -229,5 +232,27 @@
                 alertify.success('Welcome, to messages!');
 
             </script>
+            <script>
+             function deleteMessage(messageId) {
+    $.ajax({
+        url: '/contacts/' + messageId,
+        type: 'DELETE',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function (response) {
+            alertify.success(response.success ? 'Message deleted successfully' : 'Deletion failed');
+            // Optionally, remove the row from the table if deletion was successful
+            if (response.success) {
+                $('#messageRow_' + messageId).remove();
+            }
+        },
+        error: function (error) {
+            alertify.error('Error deleting message: ' + error.responseJSON.message);
+        }
+    });
+}
+
+        </script>
         </body>
     </html>

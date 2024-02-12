@@ -31,7 +31,7 @@
                 echo "<th scope='col'><i class='fa-solid fa-envelope'></i> Status</th>";
                 echo "<th scope='col'><i class='fa-solid fa-message'></i> Messages </th>";
              //   echo "<th scope='col'><i class='fa-solid fa-pen-to-square'></i> Done </th>";
-             //   echo "<th scope='col'><i class='fa-solid fa-trash'></i> Delete </th>";
+             echo "<th scope='col'><i class='fa-solid fa-trash'></i> Delete </th>";
                 echo "</tr>";
 
                 if(mysqli_num_rows($result) > 0){
@@ -41,6 +41,9 @@
                         echo "<td> {$row["customerName"]} </td>";
                         echo "<td> {$row["customerStatus"]} </td>";
                         echo "<td> {$row["reviewContent"]} </td>";
+                        echo "<td>".
+                            "<button class='btn btn-primary' onclick='deleteReview(" . $row['id'] . ")'>Delete</button>".
+                            "</td>";
                         echo "</tr>";
                     }
                 } else {
@@ -52,7 +55,7 @@
             }
         }
 
-
+        
     ?>
     <html>
         <head>
@@ -67,6 +70,8 @@
             <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
             <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css" />
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <meta name="csrf-token" content="{{ csrf_token() }}">
+
             <style>
                 #img{
                         width: 50px;
@@ -86,11 +91,37 @@
 
             <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+<script>
+    function deleteReview(reviewId) {
+        $.ajax({
+            url: '/reviews/' + reviewId,
+            type: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (response) {
+                alertify.success(response.message);
+                $('#reviewRow_' + reviewId).remove();
+            },
+            error: function (error) {
+                alertify.error(error.responseJSON.error);
+            }
+        });
+    }
+</script>
+            <script>
             <script>
                 alertify.set('notifier', 'position', 'top-right');
                 alertify.success('Welcome, to reviews!');
 
             </script>
+
         </body>
     </html>

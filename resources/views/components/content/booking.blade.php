@@ -28,58 +28,19 @@
     </div>
 
     <div class="container-sm">
-        <div class="row row-cols-sm-2 row-cols-md-4 justify-content-sm-center justify-content-center">
-        <div class="card m-2" style="width: 20rem;">
-            <img src="{{ asset('assets/image/img3.jpg') }}" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title"><i class="fa-regular fa-user"></i> Arwen</h5>
-                <p class="card-text lead-sm">Allen Barber is committed to delivering top-notch hairstyling services that align with your personal style and enhance your confidence. Step into our salon and experience the artistry of our skilled professionals.</p>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#barber1">Barber 1</button>
-            </div>
-        </div>
-        <div class="card m-2" style="width: 20rem;">
-            <img src="{{ asset('assets/image/img3.jpg') }}" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title"><i class="fa-regular fa-user"></i> Allen</h5>
-                <p class="card-text lead-sm">Step into Ramill Barber and embark on a journey of personalized grooming and styling. Our expert barbers pay meticulous attention to detail, ensuring each visit leaves you feeling rejuvenated and looking impeccably sharp.</p>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#barber2">Barber 2</button>
-            </div>
-        </div>
-        <div class="card m-2" style="width: 20rem;">
-            <img src="{{ asset('assets/image/img3.jpg') }}" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title"><i class="fa-regular fa-user"></i> Ramil</h5>
-                <p class="card-text lead-sm">Arwen Barber is where style meets expertise. Our dedicated team of barbers combines skill and passion to create hairstyles that define your individuality. Experience the epitome of grooming in a welcoming and comfortable environment.</p>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#barber3">Barber 3</button>
-            </div>
-        </div>
-        <!--<div class="card m-2">
-            <img src="img/img3.jpg" class="card-img-top img-fluid" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Barber 4</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#barber4">Barber 4</button>
-            </div>
-        </div>
-        <div class="card m-2">
-            <img src="img/img3.jpg" class="card-img-top img-fluid" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Barber 5</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#barber5">Barber 5</button>
-            </div>
-        </div>
-        <div class="card m-2">
-            <img src="img/img3.jpg" class="card-img-top img-fluid" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Barber 6</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#barber6">Barber 6</button>
-            </div>
-        </div>
-    -->
-    </div>
 
+        <div class="row row-cols-sm-2 row-cols-md-4 justify-content-sm-center justify-content-center">
+            @foreach($barbers as $barber)
+                <div class="card m-2" style="width: 20rem;">
+                    <img src="{{ asset('assets/image/img3.jpg') }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fa-regular fa-user"></i> {{ $barber->barberName }}</h5>
+                        <p class="card-text lead-sm">{{ $barber->bioContent }}</p>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#barber{{ $barber->id }}">Barber {{ $barber->id }}</button>
+                    </div>
+                </div>
+           @endforeach
+        </div>
 
     <!--Testimonials-->
     <div class="container-sm mt-5" id="testimonialsContainer">
@@ -217,12 +178,10 @@ function submitReview() {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         success: function(response) {
-            // Extract review details from the form
             var customerName = $('#customerName').val();
             var customerStatus = $('#customerStatus').val();
             var reviewContent = $('#reviewContent').val();
 
-            // Construct HTML for the new review card
             var newReview = `
                 <div class="card m-2">
                     <div class="card-body">
@@ -239,33 +198,24 @@ function submitReview() {
                     </div>
                 </div>`;
 
-            // Append the new review card to the testimonials container
             $('#reviewsContainer').append(newReview);
 
-            // Show success notification
             alertify.success(response.message);
 
-            // Reset form fields
             $('#reviewForm')[0].reset();
 
-            // Save review details to localStorage
             saveReviewToLocalStorage(customerName, customerStatus, reviewContent);
         },
         error: function(error) {
-            // Show error notification
             alertify.error('Failed to submit review. Please try again.');
         }
     });
 }
 
 $(document).ready(function() {
-    // Load reviews from localStorage
     loadReviewsFromLocalStorage();
 
-    // Function to load reviews from localStorage and display them in the testimonials section
-    // Function to load reviews from localStorage and display them in the testimonials section
     function loadReviewsFromLocalStorage() {
-        // Retrieve reviews from localStorage
         var reviews = JSON.parse(localStorage.getItem('reviews')) || [];
 
             reviews.forEach(function(review) {
@@ -294,25 +244,17 @@ $(document).ready(function() {
 });
 
 
-// Function to submit a review
-
-
-// Function to save a review to localStorage
 function saveReviewToLocalStorage(customerName, customerStatus, reviewContent) {
-    // Get existing reviews from localStorage or initialize an empty array
     var existingReviews = JSON.parse(localStorage.getItem('reviews')) || [];
 
-    // Construct new review object
     var newReview = {
         customerName: customerName,
         customerStatus: customerStatus,
         reviewContent: reviewContent
     };
 
-    // Add the new review to the existing reviews array
     existingReviews.push(newReview);
 
-    // Save the updated reviews array back to localStorage
     localStorage.setItem('reviews', JSON.stringify(existingReviews));
 }
 
@@ -324,3 +266,4 @@ function saveReviewToLocalStorage(customerName, customerStatus, reviewContent) {
 
 
 </script>
+//OG COPY

@@ -257,73 +257,16 @@
                     console.log("Hiding row with ID " + id);
                     $('#appointmentRow_' + id).hide();
 
-                    // Show a success message using Alertify
                     alertify.success(`Appointment with ID ${id} is marked as done.`);
 
-                    // You can also check the response here to show a success message
-                    // Example: alertify.success(response.message);
+
                 }, function () {
-                    // Handle cancel button if needed
+
                 });
             }
 
-/*     ------------- VERSION 2 ---------------------
-
-            function doneAppointment(id, barberName) {
-                var confirmMessage = `Are you sure your appointment with ID ${id} is done?`;
-
-                alertify.confirm(confirmMessage, function () {
-                    console.log("Hiding row with ID " + id);
-                    $('#appointmentRow_' + id).hide();
-
-                    $.ajax({
-                        url: '../Process/doneProcess.php',
-                        type: 'POST',
-                        data: { id: id, barber_name: barberName },
-                        dataType: 'json',
-                        success: function (response) {
-                            if (response.success) {
-
-                                alertify.success(`Appointment with ID ${id} is marked as done.`);
-                                $('#appointmentRow_' + response.appointment_id).hide();
-                            } else {
-                                alertify.error(response.message);
-                            }
-                        },
-                        error: function (xhr, status, error) {
-                            console.error('Error:', error);
-                        }
-                    });
-                }, function () {
-                });
-            }
-*/
         //  Delete Appointment Function
 
-            // function deleteAppointment(id, barberName) {
-            //     var confirmMessage = `Are you sure you want to delete appointment with ID ${id}?`;
-
-            //     alertify.confirm(confirmMessage, function () {
-            //         $.ajax({
-            //             url: `../Process/deleteProcess.php?id=${id}&barber_name=${barberName}`,
-            //             type: 'GET',
-            //             dataType: 'json',
-            //             success: function (response) {
-            //                 if (response.success) {
-            //                     alertify.success(response.message);
-
-            //                     setTimeout(function () {
-            //                         location.reload();
-            //                     }, 1000);
-            //                 } else {
-            //                     alertify.error(response.message);
-            //                 }
-            //             },
-            //         });
-            //     }, function () {
-
-            //     });
-            // }
             function deleteAppointment(id, barberName) {
                 var confirmMessage = `Are you sure you want to delete appointment with ID ${id}?`;
 
@@ -347,50 +290,6 @@
                 });
             }
 
-
-        //  Chart Appointment Function
-
-            function updateChart() {
-                $.ajax({
-                    url: 'chart.php',
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function(data) {
-                        var ctx = document.getElementById('myChart').getContext('2d');
-                        var chart = new Chart(ctx, {
-                            type: 'bar',
-                            data: {
-                                labels: ['Arwen', 'Allen', 'Ramil'],
-                                datasets: [{
-                                    label: '# of Appointments',
-                                    data: [data.arwen, data.allen, data.ramil],
-                                    backgroundColor: [
-                                        'rgba(255, 99, 132, 0.5)',
-                                        'rgba(54, 162, 235, 0.5)',
-                                        'rgba(255, 206, 86, 0.5)'
-                                    ],
-                                    borderColor: [
-                                        'rgba(255, 99, 132, 1)',
-                                        'rgba(54, 162, 235, 1)',
-                                        'rgba(255, 206, 86, 1)'
-                                    ],
-                                    borderWidth: 1
-                                }]
-                            },
-                            options: {
-                                scales: {
-                                    y: {
-                                        beginAtZero: true
-                                    }
-                                }
-                            }
-                        });
-                    },
-                    error: function(xhr, status, error) {
-                        console.error('Error fetching data:', error);
-                    }
-                });
-            }
 
         //  Alertify js for admin
 

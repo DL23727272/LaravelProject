@@ -33,6 +33,7 @@
                 </div>
             </div>
         </div>
+
         <!----Contact--->
         <div class="d-sm-flex flex-sm-column" id="contact">
             <form action="{{ route('contact.submitForm') }}" method="post" id="contactForms">
@@ -57,6 +58,7 @@
                 <button type="submit" class="btn btn-primary">Send Message</button>
             </form>
         </div>
+        
     </div>
 </div>
 
