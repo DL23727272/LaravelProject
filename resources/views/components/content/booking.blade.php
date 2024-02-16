@@ -39,7 +39,7 @@
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#barber{{ $barber->id }}">Barber {{ $barber->id }}</button>
                         </div>
                     </div>
-            @endforeach
+               @endforeach
             </div>
 
             <!--Testimonials-->
@@ -135,6 +135,9 @@
                     alertify.success(response.message);
 
                     $('#reviewForm')[0].reset();
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 2000);
 
                 },
                 error: function(error) {
