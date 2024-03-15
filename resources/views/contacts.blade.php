@@ -230,9 +230,6 @@
             <script>
                 alertify.set('notifier', 'position', 'top-right');
                 alertify.success('Welcome, to messages!');
-
-            </script>
-            <script>
              function deleteMessage(messageId) {
                 $.ajax({
                     url: '/contacts/' + messageId,
