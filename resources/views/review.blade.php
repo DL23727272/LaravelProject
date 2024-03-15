@@ -55,7 +55,7 @@
             }
         }
 
-        
+
     ?>
     <html>
         <head>
@@ -99,6 +99,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
 <script>
+    alertify.set('notifier', 'position', 'top-right');
+    alertify.success('Welcome, to reviews!');
+
     function deleteReview(reviewId) {
         $.ajax({
             url: '/reviews/' + reviewId,
@@ -107,11 +110,14 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function (response) {
-                alertify.success(response.message);
-                $('#reviewRow_' + reviewId).remove();
+                alertify.success(response.success ? 'Review deleted successfully' : 'Deletion failed');
+                if(response.success){
+                    $('#reviewRow_' + reviewId).remove();
+                }
+
             },
             error: function (error) {
-                alertify.error(error.responseJSON.error);
+                alertify.error('Error deleting review: ' + error.responseJSON.message);
             }
         });
     }

@@ -234,24 +234,23 @@
             </script>
             <script>
              function deleteMessage(messageId) {
-    $.ajax({
-        url: '/contacts/' + messageId,
-        type: 'DELETE',
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        success: function (response) {
-            alertify.success(response.success ? 'Message deleted successfully' : 'Deletion failed');
-            // Optionally, remove the row from the table if deletion was successful
-            if (response.success) {
-                $('#messageRow_' + messageId).remove();
+                $.ajax({
+                    url: '/contacts/' + messageId,
+                    type: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function (response) {
+                        alertify.success(response.success ? 'Message deleted successfully' : 'Deletion failed');
+                        if (response.success) {
+                            $('#messageRow_' + messageId).remove();
+                        }
+                    },
+                    error: function (error) {
+                        alertify.error('Error deleting message: ' + error.responseJSON.message);
+                    }
+                });
             }
-        },
-        error: function (error) {
-            alertify.error('Error deleting message: ' + error.responseJSON.message);
-        }
-    });
-}
 
         </script>
         </body>

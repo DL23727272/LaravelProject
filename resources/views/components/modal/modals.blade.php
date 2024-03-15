@@ -167,7 +167,7 @@
               </select>
             </div>
             </div>
-            
+
             <div class="d-flex flex-column">
                 <h1 class="lead fs-6"><i class="fa-solid fa-phone"></i> Your Phone</h1>
                 <input type="tel" id="phone1" name="phone" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" required>
