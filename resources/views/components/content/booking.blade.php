@@ -31,7 +31,7 @@
 
             <div class="row row-cols-sm-2 row-cols-md-4 justify-content-sm-center justify-content-center">
                 @foreach($barbers as $barber)
-                    <div class="card m-2" style="width: 20rem;">
+                    <div class="card m-2" style="width: 18rem;">
                         <img src="{{ asset('assets/image/img3.jpg') }}" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title"><i class="fa-regular fa-user"></i> {{ $barber->barberName }}</h5>
